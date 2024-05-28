@@ -7,8 +7,8 @@ import (
 )
 
 // Функция для преобразования римских чисел в арабские
-func RomanToArabic(roman string) (int, error) {
-	romanNumerals := map[rune]int{
+func RomanToArabic(Roman string) (int, error) {
+	RomanNumerals := map[rune]int{
 		'I': 1,
 		'V': 5,
 		'X': 10,
@@ -18,106 +18,106 @@ func RomanToArabic(roman string) (int, error) {
 		'M': 1000,
 	}
 
-	arabic := 0
-	prevValue := 0
-	for i := len(roman) - 1; i >= 0; i-- {
-		value := romanNumerals[rune(roman[i])]
-		if value < prevValue {
-			arabic -= value
+	Arabic := 0
+	PrevValue := 0
+	for i := len(Roman) - 1; i >= 0; i-- {
+		value := RomanNumerals[rune(Roman[i])]
+		if value < PrevValue {
+			Arabic -= value
 		} else {
-			arabic += value
+			Arabic += value
 		}
-		prevValue = value
+		PrevValue = value
 	}
 
-	return arabic, nil
+	return Arabic, nil
 }
 
 // Функция для преобразования арабских чисел в римские
-func ArabicToRoman(num int) string {
-	val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
-	syb := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
-	roman := ""
+func ArabicToRoman(Num int) string {
+	Val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	Syb := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	Roman := ""
 
-	for i := 0; i < len(val); i++ {
-		for num >= val[i] {
-			num -= val[i]
-			roman += syb[i]
+	for i := 0; i < len(Val); i++ {
+		for Num >= Val[i] {
+			Num -= Val[i]
+			Roman += Syb[i]
 		}
 	}
-	return roman
+	return Roman
 }
 
 // Функция для обработки римских чисел
-func CheckOperationRoman(data string, regexp *regexp.Regexp) {
-	operands := regexp.FindStringSubmatch(data)
-	firstOperand, err1 := RomanToArabic(operands[1])
-	twoOperator := operands[2]
-	secondOperand, err2 := RomanToArabic(operands[3])
+func CheckOperationRoman(Data string, Regexp *regexp.Regexp) {
+	Operands := Regexp.FindStringSubmatch(Data)
+	FirstOperand, err1 := RomanToArabic(Operands[1])
+	TwoOperator := Operands[2]
+	SecondOperand, err2 := RomanToArabic(Operands[3])
 
 	if err1 != nil || err2 != nil {
-		fmt.Println("Неверный формат чисел:", data)
+		fmt.Println("Неверный формат чисел:", Data)
 		return
 	}
 
-	var result int
-	switch twoOperator {
+	var Result int
+	switch TwoOperator {
 	case "+":
-		result = firstOperand + secondOperand
+		Result = FirstOperand + SecondOperand
 	case "-":
-		result = firstOperand - secondOperand
+		Result = FirstOperand - SecondOperand
 	case "*":
-		result = firstOperand * secondOperand
+		Result = FirstOperand * SecondOperand
 	case "/":
-		if secondOperand == 0 {
+		if SecondOperand == 0 {
 			fmt.Println("Деление на ноль невозможно")
 			return
 		}
-		result = firstOperand / secondOperand
+		Result = FirstOperand / SecondOperand
 	}
-	if result < 1 {
+	if Result < 1 {
 		panic("The developer is panicking")
 	}
-	fmt.Println(ArabicToRoman(result))
+	fmt.Println(ArabicToRoman(Result))
 }
 
 // Функция для обработки арабских чисел
-func CheckOperation(data string, regexp *regexp.Regexp) {
-	operands := regexp.FindStringSubmatch(data)
+func CheckOperation(Data string, Regexp *regexp.Regexp) {
+	Operands := Regexp.FindStringSubmatch(Data)
 
-	firstOperandStr := operands[1]
-	secondOperandStr := operands[3]
+	FirstOperandStr := Operands[1]
+	SecondOperandStr := Operands[3]
 
 	// Проверяем, что оба операнда целые числа
-	if _, err := strconv.ParseFloat(firstOperandStr, 64); err != nil {
-		panic(fmt.Sprintf("Первый операнд не является числом: %s", firstOperandStr))
+	if _, err := strconv.ParseFloat(FirstOperandStr, 64); err != nil {
+		panic(fmt.Sprintf("Первый операнд не является числом: %s", FirstOperandStr))
 	}
-	if _, err := strconv.ParseFloat(secondOperandStr, 64); err != nil {
-		panic(fmt.Sprintf("Второй операнд не является числом: %s", secondOperandStr))
+	if _, err := strconv.ParseFloat(SecondOperandStr, 64); err != nil {
+		panic(fmt.Sprintf("Второй операнд не является числом: %s", SecondOperandStr))
 	}
 
-	firstOperand, err1 := strconv.Atoi(firstOperandStr)
-	secondOperand, err2 := strconv.Atoi(secondOperandStr)
+	FirstOperand, err1 := strconv.Atoi(FirstOperandStr)
+	SecondOperand, err2 := strconv.Atoi(SecondOperandStr)
 
 	if err1 != nil || err2 != nil {
 		panic("The developer is panicking")
 	}
 
-	if firstOperand > 10 || firstOperand < 1 || secondOperand > 10 || secondOperand < 1 {
+	if FirstOperand > 10 || FirstOperand < 1 || SecondOperand > 10 || SecondOperand < 1 {
 		panic("The developer is panicking")
 	}
 
-	twoOperator := operands[2]
+	TwoOperator := Operands[2]
 
-	switch twoOperator {
+	switch TwoOperator {
 	case "+":
-		fmt.Println(firstOperand + secondOperand)
+		fmt.Println(FirstOperand + SecondOperand)
 	case "-":
-		fmt.Println(firstOperand - secondOperand)
+		fmt.Println(FirstOperand - SecondOperand)
 	case "*":
-		fmt.Println(firstOperand * secondOperand)
+		fmt.Println(FirstOperand * SecondOperand)
 	case "/":
-		fmt.Println(firstOperand / secondOperand)
+		fmt.Println(FirstOperand / SecondOperand)
 	}
 }
 
