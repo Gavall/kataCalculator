@@ -8,7 +8,7 @@ import (
 )
 
 // Функция для преобразования римских чисел в арабские
-func romanToArabic(roman string) (int, error) {
+func RomanToArabic(roman string) (int, error) {
 	romanNumerals := map[rune]int{
 		'I': 1,
 		'V': 5,
@@ -35,7 +35,7 @@ func romanToArabic(roman string) (int, error) {
 }
 
 // Функция для преобразования арабских чисел в римские
-func arabicToRoman(num int) string {
+func ArabicToRoman(num int) string {
 	val := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
 	syb := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
 	roman := ""
@@ -50,11 +50,11 @@ func arabicToRoman(num int) string {
 }
 
 // Функция для обработки римских чисел
-func checkOperationRoman(data string, regexp *regexp.Regexp) {
+func CheckOperationRoman(data string, regexp *regexp.Regexp) {
 	operands := regexp.FindStringSubmatch(data)
-	firstOperand, err1 := romanToArabic(operands[1])
+	firstOperand, err1 := RomanToArabic(operands[1])
 	twoOperator := operands[2]
-	secondOperand, err2 := romanToArabic(operands[3])
+	secondOperand, err2 := RomanToArabic(operands[3])
 
 	if err1 != nil || err2 != nil {
 		fmt.Println("Неверный формат чисел:", data)
@@ -79,11 +79,11 @@ func checkOperationRoman(data string, regexp *regexp.Regexp) {
 	if result < 1 {
 		panic("The developer is panicking")
 	}
-	fmt.Println(arabicToRoman(result))
+	fmt.Println(ArabicToRoman(result))
 }
 
 // Функция для обработки арабских чисел
-func checkOperation(data string, regexp *regexp.Regexp) {
+func CheckOperation(data string, regexp *regexp.Regexp) {
 	operands := regexp.FindStringSubmatch(data)
 
 	firstOperandStr := operands[1]
@@ -142,9 +142,9 @@ func main() {
 
 		switch {
 		case regexRomanAddition.MatchString(data): // Проверка строки на соответствие с каждым регулярным выражением
-			checkOperationRoman(data, regexRomanAddition)
+			CheckOperationRoman(data, regexRomanAddition)
 		case regexAddition.MatchString(data):
-			checkOperation(data, regexAddition)
+			CheckOperation(data, regexAddition)
 		default:
 			panic("The developer is panicking")
 		}
