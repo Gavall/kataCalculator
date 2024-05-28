@@ -1,4 +1,4 @@
-package katacalcular
+package kataCalculator
 
 import (
 	"fmt"
