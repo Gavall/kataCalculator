@@ -1,8 +1,7 @@
-package main
+package katacalcular
 
 import (
 	"fmt"
-	"os"
 	"regexp"
 	"strconv"
 )
@@ -122,31 +121,33 @@ func CheckOperation(data string, regexp *regexp.Regexp) {
 	}
 }
 
-func main() {
+// func main() {
 
-	// Регулярное выражение для римских чисел и арифметических операций
-	regexRomanAddition := regexp.MustCompile(`^\s*([IVXLCDM]+)\s*([+\-*\/])\s*([IVXLCDM]+)\s*$`)
+// // Регулярное выражение для римских чисел и арифметических операций
+// var regexRomanAddition = regexp.MustCompile(`^\s*([IVXLCDM]+)\s*([+\-*\/])\s*([IVXLCDM]+)\s*$`)
 
-	// Регулярные выражения для операций
-	regexAddition := regexp.MustCompile(`^\s*(\d+)\s*([+\-*\/])\s*(\d+)\s*$`)
+// // Регулярные выражения для операций
+// var regexAddition = regexp.MustCompile(`^\s*(\d+)\s*([+\-*\/])\s*(\d+)\s*$`)
 
-	for {
-		var data string
+// fmt.Println(regexRomanAddition)
+// fmt.Println(regexAddition)
+// for {
+// 	var data string
 
-		fmt.Println("Введите числовые данные (или 'exit' для выхода):")
-		fmt.Fscan(os.Stdin, &data)
+// 	fmt.Println("Введите числовые данные (или 'exit' для выхода):")
+// 	fmt.Fscan(os.Stdin, &data)
 
-		if data == "exit" {
-			break // завершаем цикл, если введено 'exit'
-		}
+// 	if data == "exit" {
+// 		break // завершаем цикл, если введено 'exit'
+// 	}
 
-		switch {
-		case regexRomanAddition.MatchString(data): // Проверка строки на соответствие с каждым регулярным выражением
-			CheckOperationRoman(data, regexRomanAddition)
-		case regexAddition.MatchString(data):
-			CheckOperation(data, regexAddition)
-		default:
-			panic("The developer is panicking")
-		}
-	}
-}
+// 	switch {
+// 	case regexRomanAddition.MatchString(data): // Проверка строки на соответствие с каждым регулярным выражением
+// 		CheckOperationRoman(data, regexRomanAddition)
+// 	case regexAddition.MatchString(data):
+// 		CheckOperation(data, regexAddition)
+// 	default:
+// 		panic("The developer is panicking")
+// 	}
+// }
+// }
